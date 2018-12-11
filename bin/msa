@@ -1,0 +1,4 @@
+// vim: ft=javascript
+
+const fe = require('./index.js')(require('./config_ssl.js'))
+fe.server.listen(587, () => console.log('msa started on port 587'))

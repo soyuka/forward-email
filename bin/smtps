@@ -1,0 +1,4 @@
+// vim: ft=javascript
+
+const fe = require('./index.js')(require('./config_ssl.js'))
+fe.server.listen(465, () => console.log('smtps started on port 465'))
