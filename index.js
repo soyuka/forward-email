@@ -408,27 +408,10 @@ class ForwardEmail {
               // verify transport
               // await transporter.verify();
 
-              const dkim = {};
-              if (process.env.NODE_ENV === 'production') {
-                dkim.domainName = 'forwardemail.net';
-                dkim.keySelector = 'default';
-                dkim.privateKey = fs.readFileSync(
-                  '/home/deploy/dkim-private.key',
-                  'utf8'
-                );
-              } else if (process.env.NODE_ENV === 'test') {
-                dkim.domainName = 'forwardemail.net';
-                dkim.keySelector = 'default';
-                dkim.privateKey = fs.readFileSync(
-                  path.join(__dirname, 'dkim-private.key'),
-                  'utf8'
-                );
-              }
-
               const email = {
                 ...obj,
                 envelope: session.envelope,
-                dkim
+                dkim: this.config.dkim
               };
 
               /*
