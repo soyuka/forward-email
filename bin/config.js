@@ -2,7 +2,7 @@ const fs = require('fs')
 const config = {
   dns: ['1.1.1.1', '1.0.0.1'],
   noReply: 'no-reply@bluchet.fr',
-  exchanges: ['mx1.bluchet.fr']
+  exchanges: ['mx1.bluchet.fr'],
   dkim: {
     domainName: 'bluchet.fr',
     keySelector: 'default',
