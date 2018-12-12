@@ -339,7 +339,9 @@ class ForwardEmail {
           addressParser(mail.from)[0].address.split('@')[1]
         );
 
+        console.log('dmarc')
         if (dmarcRecord) {
+          console.log('yes')
           try {
             const result = dmarcParse(dmarcRecord);
             if (
@@ -367,6 +369,8 @@ class ForwardEmail {
               mail.from = `${name} <${this.config.noReply}>`;
               obj.from = mail.from;
               session.envelope.from = mail.from;
+
+              console.log('cc', mail, obj, session)
             }
           } catch (err) {
             if (log) console.error(err);
@@ -675,7 +679,11 @@ class ForwardEmail {
 
   // this returns the forwarding address for a given email address
   async getForwardingAddress(address) {
-    return this.config.addresses[address]
+    const a = this.config.addresses[address];
+
+    if (!a) throw new invalidTXTError;
+
+    return a;
   }
 
   async onRcptTo(address, session, fn) {
