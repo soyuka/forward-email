@@ -339,9 +339,7 @@ class ForwardEmail {
           addressParser(mail.from)[0].address.split('@')[1]
         );
 
-        console.log('dmarc')
         if (dmarcRecord) {
-          console.log('yes')
           try {
             const result = dmarcParse(dmarcRecord);
             if (
@@ -369,8 +367,6 @@ class ForwardEmail {
               mail.from = `${name} <${this.config.noReply}>`;
               obj.from = mail.from;
               session.envelope.from = mail.from;
-
-              console.log('cc', mail, obj, session)
             }
           } catch (err) {
             if (log) console.error(err);
