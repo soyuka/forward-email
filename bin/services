@@ -1,0 +1,3 @@
+authbind node /home/soyuka/forward-email/bin/smtp
+authbind node /home/soyuka/forward-email/bin/smtps
+authbind node /home/soyuka/forward-email/bin/msa

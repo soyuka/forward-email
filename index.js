@@ -664,6 +664,7 @@ class ForwardEmail {
   }
 
   async onMailFrom(address, session, fn) {
+	  console.log('mail from')
     try {
       await this.validateRateLimit(address.address);
       await this.validateMX(address.address);
@@ -764,6 +765,7 @@ class ForwardEmail {
   }
 
   async onRcptTo(address, session, fn) {
+
     try {
       // validate forwarding address by looking up TXT record `forward-email=`
       await this.getForwardingAddress(address.address);
