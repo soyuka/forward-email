@@ -339,22 +339,22 @@ class ForwardEmail {
           addressParser(mail.from)[0].address.split('@')[1]
         );
 
-        if (dmarcRecord) {
-          try {
-            const result = dmarcParse(dmarcRecord);
-            if (
-              !_.isObject(result) ||
-              !_.isObject(result.tags) ||
-              !_.isObject(result.tags.p) ||
-              !_.isString(result.tags.p.value)
-            )
-              throw new Error('Invalid DMARC parsed result');
-            // if quarantine or reject then we need to rewrite w/friendly-from
-            if (
-              ['quarantine', 'reject'].includes(
-                result.tags.p.value.toLowerCase().trim()
-              )
-            ) {
+        // if (dmarcRecord) {
+        //   try {
+        //     const result = dmarcParse(dmarcRecord);
+        //     if (
+        //       !_.isObject(result) ||
+        //       !_.isObject(result.tags) ||
+        //       !_.isObject(result.tags.p) ||
+        //       !_.isString(result.tags.p.value)
+        //     )
+        //       throw new Error('Invalid DMARC parsed result');
+        //     // if quarantine or reject then we need to rewrite w/friendly-from
+        //     if (
+        //       ['quarantine', 'reject'].includes(
+        //         result.tags.p.value.toLowerCase().trim()
+        //       )
+        //     ) {
               // preserve user's name
               const { name } = addressParser(mail.from)[0];
               // eslint-disable-next-line max-depth
@@ -367,11 +367,11 @@ class ForwardEmail {
               mail.from = `${name} <${this.config.noReply}>`;
               obj.from = mail.from;
               session.envelope.from = mail.from;
-            }
-          } catch (err) {
-            if (log) console.error(err);
-          }
-        }
+            // }
+        //   } catch (err) {
+        //     if (log) console.error(err);
+        //   }
+        // }
 
         // NOTE: we probably don't need to delete these
         // but just keeping them here for future reference
